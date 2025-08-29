@@ -98,3 +98,25 @@ clearButton.addEventListener('click', function () {
     allHistory[i].remove();
   }
 });
+
+
+var copyCount = 0;
+
+var copyButtons = document.querySelectorAll(".card .actions button:first-child");
+
+for (var i = 0; i < copyButtons.length; i++) {
+  copyButtons[i].addEventListener("click", function() {
+    var card = this.closest(".card");
+    var number = card.querySelector("h2").innerText;
+
+    navigator.clipboard.writeText(number).then(function() {
+      copyCount++;
+      alert("Hotline number copied!");
+
+      var headerCopyBtn = document.querySelector(".copy-btn");
+      headerCopyBtn.textContent = copyCount + " Copy";
+    }).catch(function() {
+      alert("Failed to copy!");
+    });
+  });
+}
